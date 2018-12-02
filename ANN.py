@@ -1,36 +1,37 @@
-import math
+import math,random
 
 
-w11_2 =  0.33804757
-w21_2 =  0.42412811
 
-w12_2 = -0.48693727
-w22_2 = -0.33546053
+w11_2 =  random.randint(-1,1)
+w21_2 =  random.randint(-1,1)
 
-w13_2 =  0.38398597
-w23_2 = -0.86907973 
+w12_2 =  random.randint(-1,1)
+w22_2 =  random.randint(-1,1)
+
+w13_2 =  random.randint(-1,1)
+w23_2 =  random.randint(-1,1)
 
 
-w11_3 =  0.29484888
-w21_3 = -0.97796236
-w31_3 = -0.61818333
+w11_3 =  random.randint(-1,1)
+w21_3 =  random.randint(-1,1)
+w31_3 =  random.randint(-1,1)
 
 def sigmod(input):
-     return 1 / (1 + math.exp(-input))
+        
+    return 1 / (1 + math.exp(-input))
+ 
 
-
-#Forward pass
-#Step1 Input layer 
-print("######[Forward pass]#####  Step1 Input layer ##############")
-x1 = 1
-x2 = 1
-y  = 0
-
+ 
 training_data = [[1,1],[1,0],[0,1],[0,0]]
-output_data   = [1,1,1,0]
-for iteration in range(1,10000):
+output_data   = [0,1,1,0]
+for iteration in range(1,1000000):
     for i in range(len(training_data)):
-        print("Iteration:"+str(iteration+1))
+        # print("Iteration:"+str(iteration+1))
+
+
+        #Forward passs
+        #Step1 Input layer 
+        #print("######[Forward pass]#####  Step1 Input layer ##############")
         x1 = training_data[i][0]
         x2 = training_data[i][1]
         y =  output_data[i]
@@ -137,12 +138,12 @@ for iteration in range(1,10000):
         # print("new weight w23_2:",w23_2_new)
 
         # print("####################################################")
-        # print("Output:",a1_3)
+        #print("Error:",error1_3)
         # print("####################################################")
-
+        #exit()
 
 #Test Model
-
+ 
 test_data = [[1,1],[1,0],[0,1],[0,0]]
 for data in test_data:
  
@@ -153,4 +154,4 @@ for data in test_data:
     a2_2 = sigmod(w12_2*x1+ w22_2*x2)
     a3_2 = sigmod(w13_2*x1+ w23_2*x2)
     a1_3 = sigmod(w11_3*a1_2 + w21_3*a2_2 + w31_3*a3_2)
-    print(str(data[0])+" XOR "+str(data[1])+"="+str(a1_3))
+    print(str(data[0])+" XOR "+str(data[1])+" = "+str(a1_3))
